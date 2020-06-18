@@ -1,0 +1,22 @@
+.table-config-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  //   justify-content: space-evenly;
+  #select {
+    text-align: center;
+  }
+}
+
+.basic-input {
+  input {
+    height: 3px;
+    width: 100px;
+  }
+}
+
+.drop-down-menu {
+  width: 300px;
+}
