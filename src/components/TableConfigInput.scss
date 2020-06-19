@@ -3,8 +3,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   width: 100vw;
-  //   justify-content: space-evenly;
+
+  // justify-content: space-evenly;
   #select {
     text-align: center;
   }

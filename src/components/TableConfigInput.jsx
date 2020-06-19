@@ -5,7 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import "./TableConfig.scss";
+import "./TableConfigInput.scss";
 
 class TableConfig extends React.Component {
   dropDownChangehandler = (e) => {
@@ -45,19 +45,19 @@ class TableConfig extends React.Component {
           </label>
           <div className="basic-input">
             <TextField
-              id="width"
-              type="number"
-              label="Columns"
-              variant="outlined"
-              value={width}
-              onChange={handleTableChange}
-            />
-            <TextField
               id="height"
               type="number"
               label="Row"
               variant="outlined"
               value={height}
+              onChange={handleTableChange}
+            />
+            <TextField
+              id="width"
+              type="number"
+              label="Columns"
+              variant="outlined"
+              value={width}
               onChange={handleTableChange}
             />
             <TextField
