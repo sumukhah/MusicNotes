@@ -2,20 +2,11 @@ import React from "react";
 import ReactDataSheet from "react-datasheet";
 import "react-datasheet/lib/react-datasheet.css";
 import "./NoteTable.scss";
-import { StepGroup } from "semantic-ui-react";
 import autoTable from "jspdf-autotable";
 import JsPDF from "jspdf";
+import { Button, Typography } from "antd";
 
 class NotesTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.documentRef = React.createRef();
-  }
-
-  // componentDidMount() {
-
-  // }
-
   handlePdfPrint = (e) => {
     const doc = new JsPDF();
     doc.text(`${this.props.title || "title:"}`, 14, 10);
@@ -44,7 +35,7 @@ class NotesTable extends React.Component {
         }
       },
     });
-    const finalY = doc.previousAutoTable.finalY;
+    // const finalY = doc.previousAutoTable.finalY;
     doc.save(`${this.props.title || "raag"}.pdf`);
     // document.print()
     // console.log(element);
@@ -56,9 +47,14 @@ class NotesTable extends React.Component {
   };
 
   render() {
-    const { onCellDataChange, tableCells } = this.props;
+    const { onCellDataChange, tableCells, title } = this.props;
     return (
       <div>
+        {tableCells.length ? (
+          <Typography.Title level={2}>{title}</Typography.Title>
+        ) : (
+          ""
+        )}
         <ReactDataSheet
           data={tableCells}
           onContextMenu={(e, cell, i, j) =>
@@ -71,7 +67,11 @@ class NotesTable extends React.Component {
           ref={this.documentRef}
           id="spread-sheet"
         />
-        <button onClick={this.handlePdfPrint}>Print</button>
+        {tableCells.length ? (
+          <Button onClick={this.handlePdfPrint} type="primary">
+            Save Pdf
+          </Button>
+        ) : null}
       </div>
     );
   }

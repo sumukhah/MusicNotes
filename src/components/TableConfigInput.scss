@@ -1,24 +1,36 @@
+.table-config-input {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
 .table-config-form {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100vw;
 
-  // justify-content: space-evenly;
-  #select {
+  input {
+    border: 1px solid;
+    background-color: #FFFFFF;
     text-align: center;
   }
-}
 
-.basic-input {
-  input {
-    height: 3px;
-    width: 100px;
+  .number-input {
+    width: 60px;
   }
+
+  div {
+    position: relative;
+
+    label {
+      position: absolute;
+      left: 6px;
+      top: -20px;
+      font-size: smaller;
+    }
+  }
+
 }
 
-.drop-down-menu {
-  width: 300px;
+.basic-input input {
+  width: 50px;
+  border-width: thin;
 }

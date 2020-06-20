@@ -1,16 +1,9 @@
 import React from "react";
 import { ragas } from "../ragas/exampleRagas.json";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-
+import { Card, Menu, Dropdown, Button } from "antd";
 import "./TableConfigInput.scss";
 
 class TableConfig extends React.Component {
-  dropDownChangehandler = (e) => {
-    this.props.handleRagaChange(e);
-  };
   render() {
     const {
       height,
@@ -22,63 +15,74 @@ class TableConfig extends React.Component {
       handleConfigSubmit,
     } = this.props;
 
+    const dropDownItems = (
+      <Menu>
+        {ragas.map((item) => {
+          return (
+            <Menu.Item onClick={handleRagaChange} key={item.title}>
+              {item.title}
+            </Menu.Item>
+          );
+        })}
+      </Menu>
+    );
+
     return (
-      <div>
+      <Card className="table-config-input">
         <form onSubmit={handleConfigSubmit} className="table-config-form">
-          <label>
-            Raaga:
-            <Select
-              labelId="raga-select"
-              id="select"
-              value={title}
-              onChange={handleRagaChange}
-              className="drop-down-menu"
-            >
-              {ragas.map((raga) => {
-                return (
-                  <MenuItem value={raga.title} key={raga.title}>
-                    {raga.title}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </label>
-          <div className="basic-input">
-            <TextField
+          <div>
+            <Dropdown overlay={dropDownItems} placement="bottomCenter">
+              <input
+                value={title}
+                onChange={handleTableChange}
+                id="title"
+                autoComplete="off"
+                required
+              />
+            </Dropdown>
+            <label htmlFor="title">Raaga</label>
+          </div>
+          <div>
+            <input
+              min={0}
               id="height"
               type="number"
-              label="Row"
-              variant="outlined"
               value={height}
               onChange={handleTableChange}
+              required
+              className="number-input"
             />
-            <TextField
+            <label htmlFor="height">Rows</label>
+          </div>
+          <div>
+            <input
+              min={0}
               id="width"
               type="number"
               label="Columns"
-              variant="outlined"
               value={width}
               onChange={handleTableChange}
+              required
+              className="number-input"
             />
-            <TextField
+            <label htmlFor="width">Columns</label>
+          </div>
+          <div>
+            <input
+              min={0}
               id="columnStart"
               type="number"
-              label="Start from"
-              variant="outlined"
               value={columnStart}
               onChange={handleTableChange}
+              className="number-input"
             />
+            <label htmlFor="columnStart">Start</label>
           </div>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            title="Submit"
-          >
+          <Button htmlType="submit" type="primary">
             Submit
           </Button>
         </form>
-      </div>
+      </Card>
     );
   }
 }

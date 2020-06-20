@@ -13,14 +13,13 @@ class App extends React.Component {
     width: 0,
     columnStart: 0,
     hieghestColumn: 16,
-    tableCells: [],
+    tableCells: [], // format -> [[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
   };
 
   handleRagaChange = (e) => {
     const { title, height, width, hieghestColumn, columnStart } = ragas.find(
-      (raga) => raga.title === e.target.value
+      (raga) => raga.title === e.key
     );
-
     this.setState({
       title,
       height,
@@ -41,15 +40,19 @@ class App extends React.Component {
   };
 
   createTableCells = () => {
+    // react-datasheet > to create a blank cell, set value to empty string.
+    // for table creation [[{value: '1st row', key: '1st ele'}, ],[{value:'2nd row', key: 'second ele'}]]
     const { height, width, columnStart, hieghestColumn } = this.state;
     let colStart = parseInt(columnStart);
     const grid = [];
 
+    //[[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
     for (let i = 0; i < height; i++) {
       const row = [];
       for (let j = 0; j < width; j++) {
         const key = `${i}${j}`;
         if (i === 0) {
+          //set 1st row element to readonly
           row.push({ key, value: colStart, readOnly: true });
           colStart = colStart >= hieghestColumn ? 1 : parseInt(colStart) + 1;
         } else {
@@ -64,6 +67,8 @@ class App extends React.Component {
   onCellDataChange = (change) => {
     const { tableCells } = this.state;
     const table = [...tableCells];
+    // react-datasheet > gives array of changed/input values [[row:x, column:y, value:'z']]
+    // take every change & modify the state.tableCells values
     change.map((change) => {
       const { row, col, value } = change;
       table[row].map((cell) => {
@@ -72,6 +77,7 @@ class App extends React.Component {
         }
         return cell;
       });
+      return change;
     });
   };
 

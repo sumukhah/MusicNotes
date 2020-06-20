@@ -1,9 +1,18 @@
 .spreadsheet {
   width: 80vw;
+
+  input {
+    height: 100%;
+  }
 }
 
 .data-grid-container .data-grid .cell {
   text-align: center;
   height: 25px;
   font-size: small;
+
+  .data-editor {
+    height: 100%;
+    width: 100%;
+  }
 }
