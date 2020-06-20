@@ -4,9 +4,27 @@ import "react-datasheet/lib/react-datasheet.css";
 import "./NoteTable.scss";
 import autoTable from "jspdf-autotable";
 import JsPDF from "jspdf";
-import { Button, Typography } from "antd";
+import { Button, Typography, Popconfirm } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 class NotesTable extends React.Component {
+  state = {
+    selectedRow: 0,
+    showInsertTitleModal: false,
+  };
+
+  handleConfirmAddTitle = () => {
+    const { selectedRow } = this.state;
+    this.props.handleAddTitle(selectedRow);
+  };
+
+  handleSelectMultipleCells = (coords) => {
+    const { start, end } = coords;
+    if (start.i === end.i && end.j - start.j === this.props.width - 1) {
+      this.setState({ selectedRow: start.i, showInsertTitleModal: true });
+    }
+  };
+
   handlePdfPrint = (e) => {
     const doc = new JsPDF();
     doc.text(`${this.props.title || "title:"}`, 14, 10);
@@ -49,12 +67,27 @@ class NotesTable extends React.Component {
   render() {
     const { onCellDataChange, tableCells, title } = this.props;
     return (
-      <div>
+      <div className="note-table-component">
         {tableCells.length ? (
           <Typography.Title level={2}>{title}</Typography.Title>
         ) : (
           ""
         )}
+        <Popconfirm
+          title={
+            this.state.selectedRow === 0
+              ? "select a row, then click this button"
+              : `insert a title at row ${this.state.selectedRow}`
+          }
+          placement="bottomLeft"
+          onConfirm={this.handleConfirmAddTitle}
+        >
+          <div className="add-title-button">
+            <PlusOutlined />
+            <span>insert a title</span>
+          </div>
+        </Popconfirm>
+
         <ReactDataSheet
           data={tableCells}
           onContextMenu={(e, cell, i, j) =>
@@ -66,12 +99,12 @@ class NotesTable extends React.Component {
           onCellsChanged={onCellDataChange}
           ref={this.documentRef}
           id="spread-sheet"
+          onSelect={this.handleSelectMultipleCells}
         />
-        {tableCells.length ? (
-          <Button onClick={this.handlePdfPrint} type="primary">
-            Save Pdf
-          </Button>
-        ) : null}
+
+        <Button onClick={this.handlePdfPrint} type="primary">
+          Save Pdf
+        </Button>
       </div>
     );
   }

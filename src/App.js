@@ -16,6 +16,13 @@ class App extends React.Component {
     tableCells: [], // format -> [[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
   };
 
+  handleAddTitle = (row) => {
+    const { tableCells, width } = this.state;
+    const updatedTableCells = [...tableCells];
+    updatedTableCells[row] = [{ key: `${row}0`, value: "", colSpan: width }]; //colSpan === merge multiple Cells
+    this.setState({ tableCells: updatedTableCells });
+  };
+
   handleRagaChange = (e) => {
     const { title, height, width, hieghestColumn, columnStart } = ragas.find(
       (raga) => raga.title === e.key
@@ -67,6 +74,8 @@ class App extends React.Component {
   onCellDataChange = (change) => {
     const { tableCells } = this.state;
     const table = [...tableCells];
+    console.log(change);
+
     // react-datasheet > gives array of changed/input values [[row:x, column:y, value:'z']]
     // take every change & modify the state.tableCells values
     change.map((change) => {
@@ -79,6 +88,8 @@ class App extends React.Component {
       });
       return change;
     });
+    console.log(table);
+    this.setState({ tableCells: table });
   };
 
   render() {
@@ -105,11 +116,15 @@ class App extends React.Component {
           />
         </div>
         <div className="notes-table">
-          <NotesTable
-            title={title}
-            tableCells={tableCells}
-            onCellDataChange={this.onCellDataChange}
-          />
+          {tableCells.length ? (
+            <NotesTable
+              title={title}
+              width={width}
+              tableCells={tableCells}
+              onCellDataChange={this.onCellDataChange}
+              handleAddTitle={this.handleAddTitle}
+            />
+          ) : null}
         </div>
       </div>
     );
