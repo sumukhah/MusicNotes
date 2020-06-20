@@ -15,6 +15,9 @@ class NotesTable extends React.Component {
 
   handleConfirmAddTitle = () => {
     const { selectedRow } = this.state;
+    if (selectedRow === 0) {
+      return;
+    }
     this.props.handleAddTitle(selectedRow);
   };
 
@@ -30,26 +33,17 @@ class NotesTable extends React.Component {
     doc.text(`${this.props.title || "title:"}`, 14, 10);
     autoTable(doc, {
       html: "table",
-      body: [
-        [
-          {
-            content: "Text",
-            colSpan: 2,
-            rowSpan: 2,
-            styles: { halign: "center" },
-          },
-        ],
-      ],
-      styles: { cellWidth: "wrap" },
       theme: "grid",
-      alternateRowStyles: {
-        0: {
-          fillColor: [46, 128, 186],
-        },
+      bodyStyles: {
+        overflow: "visible",
+        halign: "center",
+        cellPadding: 0,
       },
       willDrawCell: function (data) {
         if (data.row.index === 0) {
-          doc.setFillColor(224, 224, 224);
+          doc.setFillColor(210, 210, 210);
+        } else if (data.row.raw.length === 1) {
+          doc.setFillColor(240, 240, 240);
         }
       },
     });
