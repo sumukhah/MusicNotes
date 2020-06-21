@@ -12,6 +12,11 @@
   .add-title-button {
     color: blue;
   }
+
+  .spread-sheet-foot-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .data-grid-container .data-grid .cell {

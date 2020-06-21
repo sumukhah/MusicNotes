@@ -5,7 +5,7 @@ import "./NoteTable.scss";
 import autoTable from "jspdf-autotable";
 import JsPDF from "jspdf";
 import { Button, Typography, Popconfirm } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 class NotesTable extends React.Component {
   state = {
@@ -50,7 +50,6 @@ class NotesTable extends React.Component {
     // const finalY = doc.previousAutoTable.finalY;
     doc.save(`${this.props.title || "raag"}.pdf`);
     // document.print()
-    // console.log(element);
     // doc.fromHTML(element, 15, 15, {}, () => {
     //   const pdf = doc.output("datauristring");
     //   this.doc = doc;
@@ -59,7 +58,7 @@ class NotesTable extends React.Component {
   };
 
   render() {
-    const { onCellDataChange, tableCells, title } = this.props;
+    const { onCellDataChange, tableCells, title, handleAddNewRow } = this.props;
     return (
       <div className="note-table-component">
         {tableCells.length ? (
@@ -95,10 +94,18 @@ class NotesTable extends React.Component {
           id="spread-sheet"
           onSelect={this.handleSelectMultipleCells}
         />
-
-        <Button onClick={this.handlePdfPrint} type="primary">
-          Save Pdf
-        </Button>
+        <div className="spread-sheet-foot-buttons">
+          <Button
+            onClick={this.handlePdfPrint}
+            type="primary"
+            icon={<DownloadOutlined />}
+          >
+            Save Pdf
+          </Button>
+          <Button onClick={handleAddNewRow} icon={<PlusOutlined />}>
+            Add a row
+          </Button>
+        </div>
       </div>
     );
   }

@@ -16,6 +16,26 @@ class App extends React.Component {
     tableCells: [], // format -> [[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
   };
 
+  //-----------------------------------------------TO-DO---------------------------------------------------
+  // if nextState is dependent on previous state use setState((previousState) => {key: prevousState.value})
+  // This has not implemented in the Current app
+  // setState is an asynchronous function
+  // This does not create a big issue though..But it is not a good practise in react
+  // ------------------------------------------------------------------------------------------------------
+
+  handleAddNewRow = () => {
+    const { width, height, tableCells } = this.state;
+    const row = [];
+    for (let i = 0; i < width; i++) {
+      row.push({ key: `${height}${i}`, value: "" });
+    }
+    const updatedTableCells = [...tableCells];
+    console.log(updatedTableCells);
+    updatedTableCells.push(row);
+    console.log(updatedTableCells);
+    this.setState({ height: height + 1, tableCells: updatedTableCells });
+  };
+
   handleAddTitle = (row) => {
     const { tableCells, width } = this.state;
     const updatedTableCells = [...tableCells];
@@ -74,7 +94,7 @@ class App extends React.Component {
   onCellDataChange = (change) => {
     const { tableCells } = this.state;
     const table = [...tableCells];
-    console.log(change);
+    // console.log(change);
 
     // react-datasheet > gives array of changed/input values [[row:x, column:y, value:'z']]
     // take every change & modify the state.tableCells values
@@ -88,7 +108,6 @@ class App extends React.Component {
       });
       return change;
     });
-    console.log(table);
     this.setState({ tableCells: table });
   };
 
@@ -123,6 +142,7 @@ class App extends React.Component {
               tableCells={tableCells}
               onCellDataChange={this.onCellDataChange}
               handleAddTitle={this.handleAddTitle}
+              handleAddNewRow={this.handleAddNewRow}
             />
           ) : null}
         </div>
