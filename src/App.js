@@ -4,12 +4,13 @@ import "react-datasheet/lib/react-datasheet.css";
 import { specialChars } from "./helpers/specialCharectors.json";
 import "./App.scss";
 import TableConfigInput from "./components/TableConfigInput";
-import { ragas } from "./helpers/exampleRagas.json";
+import { thala } from "./helpers/exampleThalas.json";
 import NotesTable from "./components/NotesTable";
 
 class App extends React.Component {
   state = {
     title: "",
+    raga: "",
     height: 0,
     width: 0,
     columnStart: 0,
@@ -42,12 +43,18 @@ class App extends React.Component {
     this.setState({ tableCells: updatedTableCells });
   };
 
-  handleRagaChange = (e) => {
-    const { title, height, width, hieghestColumn, columnStart } = ragas.find(
-      (raga) => raga.title === e.key
-    );
+  handleThalaChange = (e) => {
+    const {
+      title,
+      raga,
+      height,
+      width,
+      hieghestColumn,
+      columnStart,
+    } = thala.find((thala) => thala.title === e.key);
     this.setState({
       title,
+      raga,
       height,
       width,
       columnStart,
@@ -136,6 +143,7 @@ class App extends React.Component {
       height,
       width,
       title,
+      raga,
       columnStart,
       hieghestColumn,
       tableCells,
@@ -146,7 +154,7 @@ class App extends React.Component {
           <TableConfigInput
             handleTableChange={this.handleTableChange}
             handleConfigSubmit={this.handleConfigSubmit}
-            handleRagaChange={this.handleRagaChange}
+            handleThalaChange={this.handleThalaChange}
             height={height}
             width={width}
             title={title}
@@ -163,6 +171,8 @@ class App extends React.Component {
               onCellDataChange={this.onCellDataChange}
               handleAddTitle={this.handleAddTitle}
               handleAddNewRow={this.handleAddNewRow}
+              handleTableChange={this.handleTableChange}
+              raga={raga}
             />
           ) : null}
         </div>

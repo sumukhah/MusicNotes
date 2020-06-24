@@ -1,18 +1,21 @@
 {
-    "ragas": [{
-        "title": "Raag Hamsa Dwani",
+    "thala": [{
+        "title": "Theen Thal",
+        "raga": "Raag Hamsa Dwani",
         "columnStart": 9,
         "height": 27,
         "width": 16,
         "hieghestColumn": 16
     }, {
-        "title": "Example1 raga",
+        "title": "Example1 Thal",
+        "raga": "Bhamini raga",
         "columnStart": 10,
         "height": 10,
         "width": 8,
         "hieghestColumn": 16
     }, {
-        "title": "Example2 raga",
+        "title": "Example2 Thal",
+        "raga": "dinchak",
         "columnStart": 3,
         "height": 8,
         "width": 10,

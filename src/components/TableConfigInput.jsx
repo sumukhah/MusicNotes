@@ -1,5 +1,5 @@
 import React from "react";
-import { ragas } from "../helpers/exampleRagas.json";
+import { thala } from "../helpers/exampleThalas.json";
 import { Card, Menu, Dropdown, Button } from "antd";
 import "./TableConfigInput.scss";
 
@@ -10,16 +10,16 @@ class TableConfig extends React.Component {
       width,
       title,
       columnStart,
-      handleRagaChange,
+      handleThalaChange,
       handleTableChange,
       handleConfigSubmit,
     } = this.props;
 
     const dropDownItems = (
       <Menu>
-        {ragas.map((item) => {
+        {thala.map((item) => {
           return (
-            <Menu.Item onClick={handleRagaChange} key={item.title}>
+            <Menu.Item onClick={handleThalaChange} key={item.title}>
               {item.title}
             </Menu.Item>
           );
@@ -40,7 +40,7 @@ class TableConfig extends React.Component {
                 required
               />
             </Dropdown>
-            <label htmlFor="title">Raaga</label>
+            <label htmlFor="title">Thaala</label>
           </div>
           <div>
             <input

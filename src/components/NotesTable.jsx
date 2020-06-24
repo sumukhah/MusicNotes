@@ -6,7 +6,7 @@ import autoTable from "jspdf-autotable";
 import * as jsPDF from "jspdf";
 import "../helpers/fontStyles/DejaVuSans-normal.js";
 import "../helpers/fontStyles/OldSansBlackUnderline-normal";
-import { Button, Typography, Popconfirm } from "antd";
+import { Button, Typography, Popconfirm, Input } from "antd";
 import { PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 class NotesTable extends React.Component {
@@ -40,8 +40,10 @@ class NotesTable extends React.Component {
 
   handlePdfPrint = (e) => {
     const doc = new jsPDF();
+    console.log(this.props.raga);
 
-    doc.text(`${this.props.title || "title:"}`, 20, 10);
+    doc.text(20, 10, `${this.props.title || "title:"}`);
+
     autoTable(doc, {
       html: "table",
       theme: "grid",
@@ -70,8 +72,9 @@ class NotesTable extends React.Component {
       },
     });
     doc.setFontSize(15);
+    doc.text(120, 10, `${this.props.raga || "title:"}`);
     // window.print();       << use this for browser print option
-    doc.save(`${this.props.title || "raag"}.pdf`);
+    doc.save(`${this.props.title || "musicNotes"}.pdf`);
   };
 
   getValueFromCell = (cell) => {
@@ -79,10 +82,23 @@ class NotesTable extends React.Component {
   };
 
   render() {
-    const { onCellDataChange, tableCells, title, handleAddNewRow } = this.props;
+    const {
+      onCellDataChange,
+      tableCells,
+      title,
+      handleAddNewRow,
+      raga,
+      handleTableChange,
+    } = this.props;
     return (
       <div className="note-table-component">
-        <Typography.Title level={2}>{title}</Typography.Title>
+        <div className="table-title">
+          <Typography.Title level={2}>{title}</Typography.Title>
+          <div className="raaga">
+            <label htmlFor="raga">Raaga</label>
+            <Input value={raga} id="raga" onChange={handleTableChange} />
+          </div>
+        </div>
         <Popconfirm
           title={
             this.state.selectedRow === 0
