@@ -1,9 +1,10 @@
 import React from "react";
 import "react-datasheet/lib/react-datasheet.css";
 
+import { specialChars } from "./helpers/specialCharectors.json";
 import "./App.scss";
 import TableConfigInput from "./components/TableConfigInput";
-import { ragas } from "./ragas/exampleRagas.json";
+import { ragas } from "./helpers/exampleRagas.json";
 import NotesTable from "./components/NotesTable";
 
 class App extends React.Component {
@@ -30,9 +31,7 @@ class App extends React.Component {
       row.push({ key: `${height}${i}`, value: "" });
     }
     const updatedTableCells = [...tableCells];
-    console.log(updatedTableCells);
     updatedTableCells.push(row);
-    console.log(updatedTableCells);
     this.setState({ height: height + 1, tableCells: updatedTableCells });
   };
 
@@ -80,10 +79,17 @@ class App extends React.Component {
         const key = `${i}${j}`;
         if (i === 0) {
           //set 1st row element to readonly
-          row.push({ key, value: colStart, readOnly: true });
+          row.push({
+            key,
+            value: colStart,
+            readOnly: true,
+          });
           colStart = colStart >= hieghestColumn ? 1 : parseInt(colStart) + 1;
         } else {
-          row.push({ key, value: "" });
+          row.push({
+            key,
+            value: "",
+          });
         }
       }
       grid.push(row);
@@ -94,7 +100,6 @@ class App extends React.Component {
   onCellDataChange = (change) => {
     const { tableCells } = this.state;
     const table = [...tableCells];
-    // console.log(change);
 
     // react-datasheet > gives array of changed/input values [[row:x, column:y, value:'z']]
     // take every change & modify the state.tableCells values
@@ -102,7 +107,22 @@ class App extends React.Component {
       const { row, col, value } = change;
       table[row].map((cell) => {
         if (cell.key === `${row}${col}`) {
-          cell.value = value;
+          let updatedVal = value;
+          Object.keys(specialChars).forEach((key) => {
+            if (updatedVal.toLowerCase().includes(key)) {
+              updatedVal = updatedVal.replace(
+                new RegExp(key, "g"),
+                specialChars[key]
+              );
+              if (updatedVal.includes(key.toUpperCase())) {
+                updatedVal = updatedVal.replace(
+                  new RegExp(key.toUpperCase(), "g"),
+                  specialChars[key].toUpperCase()
+                );
+              }
+            }
+          });
+          cell.value = updatedVal;
         }
         return cell;
       });

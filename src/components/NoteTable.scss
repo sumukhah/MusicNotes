@@ -4,8 +4,6 @@
   input {
     height: 100%;
   }
-
-
 }
 
 .note-table-component {
@@ -17,17 +15,20 @@
     display: flex;
     justify-content: space-between;
   }
+  .underline-text-cell {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 }
 
 .data-grid-container .data-grid .cell {
   text-align: center;
-  height: 25px;
+  height: 27px;
   font-size: small;
 
   .data-editor {
     height: 100%;
     width: 100%;
     text-align: center;
-
   }
 }

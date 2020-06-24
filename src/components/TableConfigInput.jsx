@@ -1,5 +1,5 @@
 import React from "react";
-import { ragas } from "../ragas/exampleRagas.json";
+import { ragas } from "../helpers/exampleRagas.json";
 import { Card, Menu, Dropdown, Button } from "antd";
 import "./TableConfigInput.scss";
 
