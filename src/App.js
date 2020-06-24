@@ -1,5 +1,7 @@
 import React from "react";
 import "react-datasheet/lib/react-datasheet.css";
+import { Button, Tooltip, Typography, Card } from "antd";
+import { SyncOutlined } from "@ant-design/icons";
 
 import { specialChars } from "./helpers/specialCharectors.json";
 import "./App.scss";
@@ -16,6 +18,7 @@ class App extends React.Component {
     columnStart: 0,
     hieghestColumn: 16,
     tableCells: [], // format -> [[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
+    showTableConfigureForm: true,
   };
 
   //-----------------------------------------------TO-DO---------------------------------------------------
@@ -70,6 +73,13 @@ class App extends React.Component {
   handleConfigSubmit = (e) => {
     e.preventDefault();
     this.createTableCells();
+    this.handleTableConfigureFormVisiblity();
+  };
+
+  handleTableConfigureFormVisiblity = () => {
+    this.setState((state) => ({
+      showTableConfigureForm: !state.showTableConfigureForm,
+    }));
   };
 
   createTableCells = () => {
@@ -147,20 +157,33 @@ class App extends React.Component {
       columnStart,
       hieghestColumn,
       tableCells,
+      showTableConfigureForm,
     } = this.state;
     return (
       <div className="app">
         <div className="table-config">
-          <TableConfigInput
-            handleTableChange={this.handleTableChange}
-            handleConfigSubmit={this.handleConfigSubmit}
-            handleThalaChange={this.handleThalaChange}
-            height={height}
-            width={width}
-            title={title}
-            columnStart={columnStart}
-            hieghestColumn={hieghestColumn}
-          />
+          {showTableConfigureForm ? (
+            <TableConfigInput
+              handleTableChange={this.handleTableChange}
+              handleConfigSubmit={this.handleConfigSubmit}
+              handleThalaChange={this.handleThalaChange}
+              height={height}
+              width={width}
+              title={title}
+              columnStart={columnStart}
+              hieghestColumn={hieghestColumn}
+            />
+          ) : (
+            <div className="thala-title-card">
+              <Typography.Title level={2}>{title}</Typography.Title>
+              <Button
+                onClick={this.handleTableConfigureFormVisiblity}
+                ghost={true}
+              >
+                <SyncOutlined />
+              </Button>
+            </div>
+          )}
         </div>
         <div className="notes-table">
           {tableCells.length ? (

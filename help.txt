@@ -1,0 +1,36 @@
+<div>
+<input
+  min={0}
+  id="height"
+  type="number"
+  value={height}
+  onChange={handleTableChange}
+  required
+  className="number-input"
+/>
+<label htmlFor="height">Rows</label>
+</div>
+<div>
+<input
+  min={0}
+  id="width"
+  type="number"
+  label="Columns"
+  value={width}
+  onChange={handleTableChange}
+  required
+  className="number-input"
+/>
+<label htmlFor="width">Columns</label>
+</div>
+<div>
+<input
+  min={0}
+  id="columnStart"
+  type="number"
+  value={columnStart}
+  onChange={handleTableChange}
+  className="number-input"
+/>
+<label htmlFor="columnStart">Start</label>
+</div>

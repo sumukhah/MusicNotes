@@ -2,11 +2,11 @@ import React from "react";
 import ReactDataSheet from "react-datasheet";
 import "react-datasheet/lib/react-datasheet.css";
 import "./NoteTable.scss";
-import autoTable from "jspdf-autotable";
-import * as jsPDF from "jspdf";
+// import autoTable from "jspdf-autotable";
+// import * as jsPDF from "jspdf";
 import "../helpers/fontStyles/DejaVuSans-normal.js";
 import "../helpers/fontStyles/OldSansBlackUnderline-normal";
-import { Button, Typography, Popconfirm, Input } from "antd";
+import { Button, Typography, Popconfirm, Input, Tooltip } from "antd";
 import { PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 class NotesTable extends React.Component {
@@ -39,42 +39,43 @@ class NotesTable extends React.Component {
   };
 
   handlePdfPrint = (e) => {
-    const doc = new jsPDF();
-    console.log(this.props.raga);
+    window.print();
 
-    doc.text(20, 10, `${this.props.title || "title:"}`);
+    // const doc = new jsPDF();
+    // console.log(this.props.raga);
 
-    autoTable(doc, {
-      html: "table",
-      theme: "grid",
-      styles: {
-        font: "DejaVuSans",
-      },
-      bodyStyles: {
-        overflow: "visible",
-        halign: "center",
-        valign: "bottom",
-        cellPadding: 1,
-        minCellHeight: 5,
-      },
-      didParseCell: function (data) {
-        const tdElement = data.cell.raw;
-        if (tdElement.getElementsByTagName("div").length) {
-          data.cell.styles.font = "OldSansBlackUnderline";
-        }
-      },
-      willDrawCell: function (data) {
-        if (data.row.index === 0) {
-          doc.setFillColor(210, 210, 210);
-        } else if (data.row.raw.length === 1) {
-          doc.setFillColor(240, 240, 240);
-        }
-      },
-    });
-    doc.setFontSize(15);
-    doc.text(120, 10, `${this.props.raga || "title:"}`);
-    // window.print();       << use this for browser print option
-    doc.save(`${this.props.title || "musicNotes"}.pdf`);
+    // doc.text(20, 10, `${this.props.title || "title:"}`);
+
+    // autoTable(doc, {
+    //   html: "table",
+    //   theme: "grid",
+    //   styles: {
+    //     font: "DejaVuSans",
+    //   },
+    //   bodyStyles: {
+    //     overflow: "visible",
+    //     halign: "center",
+    //     valign: "bottom",
+    //     cellPadding: 1,
+    //     minCellHeight: 5,
+    //   },
+    //   didParseCell: function (data) {
+    //     const tdElement = data.cell.raw;
+    //     if (tdElement.getElementsByTagName("div").length) {
+    //       data.cell.styles.font = "OldSansBlackUnderline";
+    //     }
+    //   },
+    //   willDrawCell: function (data) {
+    //     if (data.row.index === 0) {
+    //       doc.setFillColor(210, 210, 210);
+    //     } else if (data.row.raw.length === 1) {
+    //       doc.setFillColor(240, 240, 240);
+    //     }
+    //   },
+    // });
+    // doc.save(`${this.props.title || "musicNotes"}.pdf`);
+    // doc.setFontSize(15);
+    // doc.text(120, 10, `${this.props.raga || "title:"}`);
   };
 
   getValueFromCell = (cell) => {
@@ -93,7 +94,6 @@ class NotesTable extends React.Component {
     return (
       <div className="note-table-component">
         <div className="table-title">
-          <Typography.Title level={2}>{title}</Typography.Title>
           <div className="raaga">
             <label htmlFor="raga">Raaga</label>
             <Input value={raga} id="raga" onChange={handleTableChange} />
@@ -129,12 +129,10 @@ class NotesTable extends React.Component {
             onClick={this.handlePdfPrint}
             type="primary"
             icon={<DownloadOutlined />}
-          >
-            Save Pdf
-          </Button>
-          <Button onClick={handleAddNewRow} icon={<PlusOutlined />}>
-            Add a row
-          </Button>
+          />
+          <Tooltip placement="top" title={"Add a new row"}>
+            <Button onClick={handleAddNewRow} icon={<PlusOutlined />} />
+          </Tooltip>
         </div>
       </div>
     );
