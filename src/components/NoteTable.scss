@@ -69,14 +69,14 @@
 .data-grid-container .data-grid .cell {
   text-align: center;
   height: 27px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 
-  // .data-editor {
-  //   height: 100%;
-  //   width: 100%;
-  //   text-align: center;
-  // }
+  .data-editor {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .data-grid-container .data-grid .cell.read-only {

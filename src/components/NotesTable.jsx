@@ -2,8 +2,8 @@ import React from "react";
 import ReactDataSheet from "react-datasheet";
 import "react-datasheet/lib/react-datasheet.css";
 import "./NoteTable.scss";
-import autoTable from "jspdf-autotable";
-import * as jsPDF from "jspdf";
+// import autoTable from "jspdf-autotable";
+// import * as jsPDF from "jspdf";
 import "../helpers/fontStyles/DejaVuSans-normal.js";
 import "../helpers/fontStyles/OldSansBlackUnderline-normal";
 import { Button, Typography, Popconfirm, Input, Tooltip } from "antd";
@@ -11,22 +11,19 @@ import { PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 class NotesTable extends React.Component {
   state = {
+    allowInsertTitle: false,
     selectedRow: 0,
     showInsertTitleModal: false,
   };
 
-  handleConfirmAddTitle = () => {
-    const { selectedRow } = this.state;
-    if (selectedRow === 0) {
-      return;
-    }
-    this.props.handleAddTitle(selectedRow);
+  handleAddTitle = () => {
+    this.setState({ allowInsertTitle: true });
   };
 
   handleSelectMultipleCells = (coords) => {
-    const { start, end } = coords;
-    if (start.i === end.i && end.j - start.j === this.props.width - 1) {
-      this.setState({ selectedRow: start.i, showInsertTitleModal: true });
+    if (this.state.allowInsertTitle && coords.start.i !== 0) {
+      this.props.handleAddTitle(coords.start.i);
+      this.setState({ allowInsertTitle: false });
     }
   };
 
@@ -107,24 +104,11 @@ class NotesTable extends React.Component {
             />
           </div>
         </div>
-        <Tooltip
-          title={"Select a row for inserting title"}
-          placement="bottomLeft"
-        >
-          <Popconfirm
-            title={
-              this.state.selectedRow === 0
-                ? "select a row, then click this button"
-                : `insert a title at row ${this.state.selectedRow}`
-            }
-            placement="bottomLeft"
-            onConfirm={this.handleConfirmAddTitle}
-          >
-            <div className="add-title-button">
-              <PlusOutlined />
-              <span>insert a title</span>
-            </div>
-          </Popconfirm>
+        <Tooltip title="Add title" placement="bottomRight">
+          <div className="add-title-button" onClick={this.handleAddTitle}>
+            <PlusOutlined />
+            <span>insert a title</span>
+          </div>
         </Tooltip>
 
         <ReactDataSheet
