@@ -104,7 +104,7 @@ class NotesTable extends React.Component {
             />
           </div>
         </div>
-        <Tooltip title="Add title" placement="bottomRight">
+        <Tooltip title="Add title" placement="topLeft">
           <div className="add-title-button" onClick={this.handleAddTitle}>
             <PlusOutlined />
             <span>insert a title</span>
@@ -114,12 +114,15 @@ class NotesTable extends React.Component {
         <ReactDataSheet
           data={tableCells}
           valueRenderer={this.getValueFromCell}
-          dataRenderer={this.getValueFromCell}
+          dataRenderer={(cell) => cell.value}
+          // ^ Don't replace with getValueFromCell ,
+          //  It makes multiple select deletion slower, does not rerender.
           onCellsChanged={onCellDataChange}
           onSelect={this.handleSelectMultipleCells}
           className="spreadsheet"
           valueViewer={this.displayTableCells}
         />
+
         <div className="spread-sheet-foot-buttons">
           <Button
             onClick={this.handlePdfPrint}

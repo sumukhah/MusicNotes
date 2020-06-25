@@ -46,14 +46,16 @@
 }
 
 @media print {
-  body {
-    visibility: hidden;
-    margin: 0mm 0mm;
-    padding: 0mm;
-  }
 
   @page {
-    margin: 0px
+    margin: 0mm 0mm;
+    padding: 0mm 0mm;
+  }
+
+  body {
+    visibility: hidden;
+    position: relative;
+    bottom: 150px;
   }
 
   .print-visible {
