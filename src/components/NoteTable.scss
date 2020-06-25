@@ -8,6 +8,17 @@
 
 }
 
+.data-grid-container {
+  // table {
+  //   border: 1.6px solid rgb(134, 134, 134);
+  // }
+}
+
+.ant-input {
+  border: 0px;
+  border-bottom: 1px solid;
+}
+
 .note-table-component {
   .add-title-button {
     color: blue;
@@ -32,17 +43,44 @@
     align-items: center;
 
   }
+}
 
+@media print {
+  body {
+    visibility: hidden;
+    margin: 0mm 0mm;
+    padding: 0mm;
+  }
+
+  @page {
+    margin: 0px
+  }
+
+  .print-visible {
+    visibility: visible;
+  }
+
+  table {
+    visibility: visible;
+    -webkit-print-color-adjust: exact
+  }
 }
 
 .data-grid-container .data-grid .cell {
   text-align: center;
   height: 27px;
-  font-size: small;
+  font-size: 20px;
+  font-weight: 500;
 
-  .data-editor {
-    height: 100%;
-    width: 100%;
-    text-align: center;
-  }
+  // .data-editor {
+  //   height: 100%;
+  //   width: 100%;
+  //   text-align: center;
+  // }
+}
+
+.data-grid-container .data-grid .cell.read-only {
+  background-color: #dddddd;
+  color: rgb(95, 95, 95);
+  border: 0.5px solid;
 }
