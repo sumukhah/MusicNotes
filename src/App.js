@@ -9,11 +9,11 @@ import NotesTable from "./components/NotesTable";
 
 class App extends React.Component {
   state = {
-    title: "",
-    raga: "",
-    height: 0,
-    width: 0,
-    columnStart: 0,
+    title: "theen thanl",
+    raga: "abc",
+    height: 15,
+    width: 20,
+    columnStart: 2,
     hieghestColumn: 16,
     tableCells: [], // format -> [[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
   };

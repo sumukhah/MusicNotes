@@ -6,7 +6,7 @@ import "./NoteTable.scss";
 // import * as jsPDF from "jspdf";
 import "../helpers/fontStyles/DejaVuSans-normal.js";
 import "../helpers/fontStyles/OldSansBlackUnderline-normal";
-import { Button, Typography, Popconfirm, Input, Tooltip } from "antd";
+import { Button, Typography, Input, Tooltip } from "antd";
 import { PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 class NotesTable extends React.Component {
@@ -28,16 +28,38 @@ class NotesTable extends React.Component {
   };
 
   displayTableCells = (props) => {
-    if (String(props.value).includes("__")) {
-      const underlinedValue = props.value.replace("__", "");
-      return <div className="underline-text-cell">{underlinedValue}</div>;
+    if (String(props.value).includes("_")) {
+      let charList = String(props.value).replace(/__/g, "").split("_");
+
+      if (charList.length > 1) {
+        charList = charList.map((char, index) => {
+          if (charList[index + 1] === "" || index < charList.length - 1) {
+            return char.length > 1 ? (
+              <span>
+                {char.slice(0, char.length - 1)}
+                <u>{char[char.length - 1]}</u>
+              </span>
+            ) : (
+              <u>{char}</u>
+            );
+          }
+          return <span>{char}</span>;
+        });
+      }
+
+      return String(props.value).includes("__") ? (
+        <div className="underline-text-cell">{charList || props.value}</div>
+      ) : (
+        <div>{charList || props.value}</div>
+      );
     }
-    return <React.Fragment>{props.value}</React.Fragment>;
+    return <div>{props.value}</div>;
   };
 
   handlePdfPrint = (e) => {
     window.print();
 
+    // For generating printed Document, But this is not much effiecient
     // const doc = new jsPDF();
     // console.log(this.props.raga);
 
