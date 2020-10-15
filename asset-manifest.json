@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/MusicNotes/static/css/main.65d08e2d.chunk.css",
+    "main.js": "/MusicNotes/static/js/main.f665a7b5.chunk.js",
+    "main.js.map": "/MusicNotes/static/js/main.f665a7b5.chunk.js.map",
+    "runtime-main.js": "/MusicNotes/static/js/runtime-main.6516aa20.js",
+    "runtime-main.js.map": "/MusicNotes/static/js/runtime-main.6516aa20.js.map",
+    "static/css/2.6aee0b3d.chunk.css": "/MusicNotes/static/css/2.6aee0b3d.chunk.css",
+    "static/js/2.e464726a.chunk.js": "/MusicNotes/static/js/2.e464726a.chunk.js",
+    "static/js/2.e464726a.chunk.js.map": "/MusicNotes/static/js/2.e464726a.chunk.js.map",
+    "index.html": "/MusicNotes/index.html",
+    "precache-manifest.c29578481705d33a63c24ea19f969271.js": "/MusicNotes/precache-manifest.c29578481705d33a63c24ea19f969271.js",
+    "service-worker.js": "/MusicNotes/service-worker.js",
+    "static/css/2.6aee0b3d.chunk.css.map": "/MusicNotes/static/css/2.6aee0b3d.chunk.css.map",
+    "static/css/main.65d08e2d.chunk.css.map": "/MusicNotes/static/css/main.65d08e2d.chunk.css.map",
+    "static/js/2.e464726a.chunk.js.LICENSE.txt": "/MusicNotes/static/js/2.e464726a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6516aa20.js",
+    "static/css/2.6aee0b3d.chunk.css",
+    "static/js/2.e464726a.chunk.js",
+    "static/css/main.65d08e2d.chunk.css",
+    "static/js/main.f665a7b5.chunk.js"
+  ]
+}
