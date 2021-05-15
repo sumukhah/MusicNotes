@@ -4,8 +4,6 @@
   input {
     height: 100%;
   }
-
-
 }
 
 .ant-input {
@@ -16,11 +14,13 @@
 .note-table-component {
   .add-title-button {
     color: blue;
+    margin-bottom: 10px;
   }
 
   .spread-sheet-foot-buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
   }
 
   u {
@@ -42,12 +42,10 @@
     justify-content: space-between;
     // align-content: space-between;
     align-items: center;
-
   }
 }
 
 @media print {
-
   @page {
     margin: 0mm 0mm;
     padding: 0mm 0mm;
@@ -65,7 +63,7 @@
 
   table {
     visibility: visible;
-    -webkit-print-color-adjust: exact
+    -webkit-print-color-adjust: exact;
   }
 }
 

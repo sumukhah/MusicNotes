@@ -4,17 +4,17 @@ import "react-datasheet/lib/react-datasheet.css";
 import { specialChars } from "./helpers/specialCharectors.json";
 import "./App.scss";
 import TableConfigInput from "./components/TableConfigInput";
-import { thala } from "./helpers/exampleThalas.json";
+import { tala } from "./helpers/exampleTalas.json";
 import NotesTable from "./components/NotesTable";
 
 class App extends React.Component {
   state = {
-    title: "theen thanl",
-    raga: "abc",
+    title: "Teen Taal",
+    raga: "Raag Yaman",
     height: 15,
-    width: 20,
-    columnStart: 2,
-    hieghestColumn: 16,
+    width: 16,
+    columnStart: 9,
+    highestColumn: 16,
     tableCells: [], // format -> [[{key:k, value: val}, {key:k, value:val}], [{key:k, value:val}]]
   };
 
@@ -43,22 +43,22 @@ class App extends React.Component {
     this.setState({ tableCells: updatedTableCells });
   };
 
-  handleThalaChange = (e) => {
+  handleTalaChange = (e) => {
     const {
       title,
       raga,
       height,
       width,
-      hieghestColumn,
+      highestColumn,
       columnStart,
-    } = thala.find((thala) => thala.title === e.key);
+    } = tala.find((tala) => tala.title === e.key);
     this.setState({
       title,
       raga,
       height,
       width,
       columnStart,
-      hieghestColumn,
+      highestColumn,
     });
   };
 
@@ -75,7 +75,7 @@ class App extends React.Component {
   createTableCells = () => {
     // react-datasheet > to create a blank cell, set value to empty string.
     // for table creation [[{value: '1st row', key: '1st ele'}, ],[{value:'2nd row', key: 'second ele'}]]
-    const { height, width, columnStart, hieghestColumn } = this.state;
+    const { height, width, columnStart, highestColumn } = this.state;
     let colStart = parseInt(columnStart);
     const grid = [];
 
@@ -91,7 +91,7 @@ class App extends React.Component {
             value: colStart,
             readOnly: true,
           });
-          colStart = colStart >= hieghestColumn ? 1 : parseInt(colStart) + 1;
+          colStart = colStart >= highestColumn ? 1 : parseInt(colStart) + 1;
         } else {
           row.push({
             key,
@@ -145,7 +145,7 @@ class App extends React.Component {
       title,
       raga,
       columnStart,
-      hieghestColumn,
+      highestColumn,
       tableCells,
     } = this.state;
     return (
@@ -154,12 +154,12 @@ class App extends React.Component {
           <TableConfigInput
             handleTableChange={this.handleTableChange}
             handleConfigSubmit={this.handleConfigSubmit}
-            handleThalaChange={this.handleThalaChange}
+            handleTalaChange={this.handleTalaChange}
             height={height}
             width={width}
             title={title}
             columnStart={columnStart}
-            hieghestColumn={hieghestColumn}
+            highestColumn={highestColumn}
           />
         </div>
         <div className="notes-table">
