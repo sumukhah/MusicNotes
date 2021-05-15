@@ -74,7 +74,6 @@ class NotesTable extends React.Component {
       tableCells,
       title,
       handleAddNewRow,
-      raga,
       handleTableChange,
     } = this.props;
     return (
@@ -85,8 +84,7 @@ class NotesTable extends React.Component {
           </Typography.Title>
           <div className="raaga">
             <Input
-              placeholder="raaga"
-              value={raga}
+              placeholder="Raag Yaman"
               id="raga"
               onChange={handleTableChange}
               className="print-visible raga-input"
