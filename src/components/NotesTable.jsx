@@ -58,43 +58,10 @@ class NotesTable extends React.Component {
 
   handlePdfPrint = (e) => {
     window.print();
+  };
 
-    // For generating printed Document, But this is not much effiecient
-    // const doc = new jsPDF();
-    // console.log(this.props.raga);
+  handleLocalSave = (e) => {
 
-    // doc.text(20, 10, `${this.props.title || "title:"}`);
-
-    // autoTable(doc, {
-    //   html: "table",
-    //   theme: "grid",
-    //   styles: {
-    //     font: "DejaVuSans",
-    //   },
-    //   bodyStyles: {
-    //     overflow: "visible",
-    //     halign: "center",
-    //     valign: "bottom",
-    //     cellPadding: 1,
-    //     minCellHeight: 5,
-    //   },
-    //   didParseCell: function (data) {
-    //     const tdElement = data.cell.raw;
-    //     if (tdElement.getElementsByTagName("div").length) {
-    //       data.cell.styles.font = "OldSansBlackUnderline";
-    //     }
-    //   },
-    //   willDrawCell: function (data) {
-    //     if (data.row.index === 0) {
-    //       doc.setFillColor(210, 210, 210);
-    //     } else if (data.row.raw.length === 1) {
-    //       doc.setFillColor(240, 240, 240);
-    //     }
-    //   },
-    // });
-    // doc.setFontSize(15);
-    // doc.text(120, 10, `${this.props.raga || "title:"}`);
-    // doc.save(`${this.props.title || "musicNotes"}.pdf`);
   };
 
   getValueFromCell = (cell) => {
@@ -107,7 +74,6 @@ class NotesTable extends React.Component {
       tableCells,
       title,
       handleAddNewRow,
-      raga,
       handleTableChange,
     } = this.props;
     return (
@@ -118,8 +84,7 @@ class NotesTable extends React.Component {
           </Typography.Title>
           <div className="raaga">
             <Input
-              placeholder="raaga"
-              value={raga}
+              placeholder="Raag Yaman"
               id="raga"
               onChange={handleTableChange}
               className="print-visible raga-input"
@@ -129,7 +94,7 @@ class NotesTable extends React.Component {
         <Tooltip title="Add title" placement="topLeft">
           <div className="add-title-button" onClick={this.handleAddTitle}>
             <PlusOutlined />
-            <span>insert a title</span>
+            <span>Add a custom row title</span>
           </div>
         </Tooltip>
 
@@ -151,7 +116,14 @@ class NotesTable extends React.Component {
             type="primary"
             icon={<DownloadOutlined />}
           >
-            Save Pdf
+            Save as PDF
+          </Button>
+          <Button
+            onClick={this.handleLocalSave}
+            type="primary"
+            icon={<DownloadOutlined />}
+          >
+            Save locally
           </Button>
           <Button onClick={handleAddNewRow} icon={<PlusOutlined />}>
             Add a row

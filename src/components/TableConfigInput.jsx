@@ -1,5 +1,5 @@
 import React from "react";
-import { thala } from "../helpers/exampleThalas.json";
+import { tala } from "../helpers/exampleTalas.json";
 import { Card, Menu, Dropdown, Button } from "antd";
 import "./TableConfigInput.scss";
 
@@ -10,16 +10,16 @@ class TableConfig extends React.Component {
       width,
       title,
       columnStart,
-      handleThalaChange,
+      handleTalaChange,
       handleTableChange,
       handleConfigSubmit,
     } = this.props;
 
     const dropDownItems = (
       <Menu>
-        {thala.map((item) => {
+        {tala.map((item) => {
           return (
-            <Menu.Item onClick={handleThalaChange} key={item.title}>
+            <Menu.Item onClick={handleTalaChange} key={item.title}>
               {item.title}
             </Menu.Item>
           );
@@ -40,7 +40,7 @@ class TableConfig extends React.Component {
                 required
               />
             </Dropdown>
-            <label htmlFor="title">Thaala</label>
+            <label htmlFor="title">Tala</label>
           </div>
           <div>
             <input
@@ -76,7 +76,7 @@ class TableConfig extends React.Component {
               onChange={handleTableChange}
               className="number-input"
             />
-            <label htmlFor="columnStart">Start</label>
+            <label htmlFor="columnStart">Starting Beat</label>
           </div>
           <Button htmlType="submit" type="primary">
             Submit

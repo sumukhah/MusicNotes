@@ -1,20 +1,19 @@
 .table-config-input {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .table-config-form {
   display: flex;
-  align-items: center;
+  justify-content: space-around;
 
   input {
     border: 1px solid;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     text-align: center;
   }
 
   .number-input {
-    width: 60px;
+    width: 100px;
   }
 
   div {
@@ -27,7 +26,6 @@
       font-size: smaller;
     }
   }
-
 }
 
 .basic-input input {
